@@ -9,7 +9,6 @@ public class Fun {
 		System.out.println("Helo from Chandler");
 		System.out.println("Hello world...seohyun");
 
-
 	}
-
+	
 }
