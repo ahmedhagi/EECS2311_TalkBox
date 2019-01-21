@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 public class Sound extends JFrame {
 
 	private JPanel contentPane;
-	private File audio;
+	private File soundfilein;
 	private AudioInputStream audioIn;
 	private Clip clip = null;
 
@@ -60,8 +60,7 @@ public class Sound extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				String s1="data\\audio\\test1.wav";
-				playMusic(s1);
+				playMusic("data\\audio\\test1.wav");
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -136,10 +135,10 @@ public class Sound extends JFrame {
 			e.printStackTrace();
 		}
 		
-		audio = new File(SoundFile);
+		soundfilein = new File(SoundFile);
 		
 		try {
-			audioIn = AudioSystem.getAudioInputStream(audio.toURI().toURL());
+			audioIn = AudioSystem.getAudioInputStream(soundfilein.toURI().toURL());
 			clip.open(audioIn);
 			clip.start();
 		} catch (UnsupportedAudioFileException ee) {
