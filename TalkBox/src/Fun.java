@@ -5,7 +5,9 @@ public class Fun {
 
 
 		System.out.println("Fun with Gittttt. Change here.");
-		System.out.println("merge");
-
+		System.out.println("Hello world...AndrewTake2;");
+		System.out.println("Helo from Chandler");
+		System.out.println("Hello world...seohyun");
+		//merge
 }
 }
