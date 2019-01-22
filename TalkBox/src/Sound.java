@@ -21,6 +21,9 @@ import javax.swing.border.EmptyBorder;
 public class Sound extends JFrame {
 
 	private JPanel contentPane;
+	private File soundfilein;
+	private AudioInputStream audioIn;
+	private Clip clip = null;
 
 	/**
 	 * Launch the application.
@@ -57,7 +60,7 @@ public class Sound extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				music("\\ShakeYourBootay.wav");
+				playMusic("data\\audio\\test1.wav");
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -71,7 +74,7 @@ public class Sound extends JFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				music("\\MoodyLoop.wav");
+				
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
@@ -85,7 +88,7 @@ public class Sound extends JFrame {
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				music("\\Medley1.wav");
+		
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
@@ -99,7 +102,7 @@ public class Sound extends JFrame {
 		btnNewButton_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				music("\\KissesinParadise.wav");
+				
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
@@ -113,7 +116,7 @@ public class Sound extends JFrame {
 		btnNewButton_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				music("\\UpbeatFunk.wav");
+				
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
@@ -124,17 +127,18 @@ public class Sound extends JFrame {
 		contentPane.add(btnNewButton_4, gbc_btnNewButton_4);
 
 	}
-
-	public static void music(String sound) {
-
-		String home = System.getProperty("user.home");
-		java.nio.file.Path path = java.nio.file.Paths.get(home, "TalkBoxData");
-		File file = new File(path.toString());
-		file.mkdirs();
-		File f = new File(path.toString() + sound);
+	private void playMusic(String SoundFile) {
 		try {
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(f);
-			Clip clip = AudioSystem.getClip();
+			clip = AudioSystem.getClip();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		soundfilein = new File(SoundFile);
+		
+		try {
+			audioIn = AudioSystem.getAudioInputStream(soundfilein.toURI().toURL());
 			clip.open(audioIn);
 			clip.start();
 		} catch (UnsupportedAudioFileException ee) {
@@ -144,7 +148,6 @@ public class Sound extends JFrame {
 		} catch (LineUnavailableException ee) {
 			ee.printStackTrace();
 		}
-
 	}
 
 }
