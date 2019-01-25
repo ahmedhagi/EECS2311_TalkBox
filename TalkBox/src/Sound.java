@@ -1,5 +1,3 @@
-
-
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -27,6 +25,7 @@ import java.awt.event.ActionEvent;
 
 public class Sound extends JFrame {
 
+	private JToggleButton btn1, btn2, btn3, btn4;
 	private JPanel contentPane;
 	private File soundfilein;
 	private String name;
@@ -56,6 +55,8 @@ public class Sound extends JFrame {
 
 
 	public Sound() {
+		
+		
 		textField.setColumns(10);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 712, 531);
@@ -70,6 +71,8 @@ public class Sound extends JFrame {
 		gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 		
+		setClip();
+	
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -87,11 +90,11 @@ public class Sound extends JFrame {
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btn1.isSelected()){
-					lblNewLabel.setText("button1 clicked");
+					lblNewLabel.setText("button1 is now playing");
 					playMusic("data\\audio\\test1.wav");
 	            }
 	            else {
-	            	//stop the music
+	            
 	          }
 			}
 		});
@@ -99,6 +102,18 @@ public class Sound extends JFrame {
 		
 		
 		JToggleButton btn2 = new JToggleButton("toggle2");
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(btn2.isSelected()){
+					lblNewLabel.setText("button2 is now playing");
+					playMusic("data\\audio\\ShakeYourBootay.wav");
+	            }
+	            else {
+	            	
+	          }
+			}
+				
+		});
 		GridBagConstraints gbc_btn2 = new GridBagConstraints();
 		gbc_btn2.insets = new Insets(0, 0, 5, 5);
 		gbc_btn2.gridx = 4;
@@ -106,6 +121,17 @@ public class Sound extends JFrame {
 		contentPane.add(btn2, gbc_btn2);
 		
 		JToggleButton btn3 = new JToggleButton("toggle 3");
+		btn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(btn3.isSelected()){
+					lblNewLabel.setText("button3 is now playing");
+					playMusic("data\\audio\\MoodyLoop.wav");
+	            }
+	            else {
+	            	
+	          }
+			}
+		});
 		GridBagConstraints gbc_btn3 = new GridBagConstraints();
 		gbc_btn3.insets = new Insets(0, 0, 5, 5);
 		gbc_btn3.gridx = 6;
@@ -114,32 +140,52 @@ public class Sound extends JFrame {
 
 		
 		JToggleButton btn4 = new JToggleButton("toggle4");
+		btn4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(btn4.isSelected()){
+					lblNewLabel.setText("button4 is now playing");
+					playMusic("data\\audio\\UpBeatFunk.wav");
+	            }
+	            else {
+	            	
+	          }
+				
+			}
+		});
 		GridBagConstraints gbc_btn4 = new GridBagConstraints();
 		gbc_btn4.insets = new Insets(0, 0, 5, 5);
 		gbc_btn4.gridx = 8;
 		gbc_btn4.gridy = 1;
 		contentPane.add(btn4, gbc_btn4);
 		
-		
+     	//button group 1 add//
 		btngroup1 = new ButtonGroup();
-		addGroup(btngroup1,btn1);
-		addGroup(btngroup1,btn2);
-		addGroup(btngroup1,btn3);
-		addGroup(btngroup1,btn4);
-		
+		btngroup1.add(btn1);
+		btngroup1.add(btn2);
+		btngroup1.add(btn3);
+		btngroup1.add(btn4);
+   
 	}
 	
 	public void addGroup(ButtonGroup btngroup,JToggleButton btn) {
 		btngroup.add(btn);
 	}
 	
-	private void playMusic(String SoundFile) {
+	private void setClip() {
 		try {
-			clip = AudioSystem.getClip(); 
+			clip = AudioSystem.getClip();
 		} catch (LineUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	private void playMusic(String SoundFile) {
+		
+		
+		clip.stop();
+		clip.close();
 		
 		soundfilein = new File(SoundFile);
 		
