@@ -164,8 +164,29 @@ public class Sound extends JFrame {
 		btngroup1.add(btn2);
 		btngroup1.add(btn3);
 		btngroup1.add(btn4);
+		
+		
+		
+		JToggleButton btn5 = new JToggleButton("Pause");
+		btn5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(btn5.isSelected()){
+					clip.stop();
+	            }
+	            else {
+	            	clip.start();
+	          }
+			}
+		});
+		GridBagConstraints gbc_btn5 = new GridBagConstraints();
+		gbc_btn5.insets = new Insets(0, 0, 5, 5);
+		gbc_btn5.gridx = 10;
+		gbc_btn5.gridy = 1;
+		contentPane.add(btn5, gbc_btn5);
    
 	}
+	
+   
 	
 	public void addGroup(ButtonGroup btngroup,JToggleButton btn) {
 		btngroup.add(btn);
