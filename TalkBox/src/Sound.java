@@ -90,7 +90,7 @@ public class Sound extends JFrame {
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btn1.isSelected()){
-					lblNewLabel.setText("button1 is now playing");
+					lblNewLabel.setText(getName("data\\audio\\test1.wav")+" is now playing");
 					playMusic("data\\audio\\test1.wav");
 	            }
 	            else {
@@ -105,7 +105,7 @@ public class Sound extends JFrame {
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(btn2.isSelected()){
-					lblNewLabel.setText("button2 is now playing");
+					lblNewLabel.setText(getName("data\\audio\\ShakeYourBootay.wav")+" is now playing");
 					playMusic("data\\audio\\ShakeYourBootay.wav");
 	            }
 	            else {
@@ -124,7 +124,7 @@ public class Sound extends JFrame {
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btn3.isSelected()){
-					lblNewLabel.setText("button3 is now playing");
+					lblNewLabel.setText(getName("data\\audio\\MoodyLoop.wav") +" is now playing");
 					playMusic("data\\audio\\MoodyLoop.wav");
 	            }
 	            else {
@@ -143,7 +143,7 @@ public class Sound extends JFrame {
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btn4.isSelected()){
-					lblNewLabel.setText("button4 is now playing");
+					lblNewLabel.setText(getName("data\\audio\\UpBeatFunk.wav")+" is now playing");
 					playMusic("data\\audio\\UpBeatFunk.wav");
 	            }
 	            else {
@@ -167,22 +167,39 @@ public class Sound extends JFrame {
 		
 		
 		
-		JToggleButton btn5 = new JToggleButton("Pause");
+		JToggleButton btn5 = new JToggleButton("Pause/Resume");
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(btn5.isSelected()){
+					 lblNewLabel.setText("Pause");
 					clip.stop();
 	            }
 	            else {
+	            	
 	            	clip.start();
 	          }
 			}
 		});
 		GridBagConstraints gbc_btn5 = new GridBagConstraints();
 		gbc_btn5.insets = new Insets(0, 0, 5, 5);
-		gbc_btn5.gridx = 10;
+		gbc_btn5.gridx = 9;
 		gbc_btn5.gridy = 1;
 		contentPane.add(btn5, gbc_btn5);
+		
+		JButton btnStop = new JButton("Stop");
+		btnStop.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				 lblNewLabel.setText("Stop");
+				clip.stop();
+				clip.close();
+			}
+		});
+		GridBagConstraints gbc_btnStop = new GridBagConstraints();
+		gbc_btnStop.insets = new Insets(0, 0, 5, 5);
+		gbc_btnStop.gridx = 10;
+		gbc_btnStop.gridy = 1;
+		contentPane.add(btnStop, gbc_btnStop);
    
 	}
 	
@@ -221,6 +238,15 @@ public class Sound extends JFrame {
 		} catch (LineUnavailableException ee) {
 			ee.printStackTrace();
 		}
+	}
+	public String getName(String str) {
+		StringBuffer s1 = new StringBuffer(str);
+		StringBuffer s2= new StringBuffer();;
+		char [] temp  = s1.substring(11).toCharArray();
+	    for(int i=0;i<temp.length-4;i++) {
+	    	s2.append(temp[i]);
+	    }
+	    return s2.toString();
 	}
 
 
