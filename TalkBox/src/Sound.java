@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,6 +23,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class Sound extends JFrame {
 
@@ -72,21 +74,21 @@ public class Sound extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		setClip();
-	
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 2;
-		gbc_lblNewLabel.gridy = 0;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel.gridx = 6;
+		gbc_lblNewLabel.gridy = 2;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		
 		GridBagConstraints gbc_btn1 = new GridBagConstraints();
 		gbc_btn1.insets = new Insets(0, 0, 5, 5);
 		gbc_btn1.gridx = 2;
 		gbc_btn1.gridy = 1;
 	
 		
-		JToggleButton btn1 = new JToggleButton("toggle 1");
+		JToggleButton btn1 = new JToggleButton("Sound 1");
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btn1.isSelected()){
@@ -98,10 +100,18 @@ public class Sound extends JFrame {
 	          }
 			}
 		});
+		
+		
+		JLabel talkbox = new JLabel("TalkBox1.0");
+		GridBagConstraints gbc_talkbox = new GridBagConstraints();
+		gbc_talkbox.insets = new Insets(0, 0, 5, 5);
+		gbc_talkbox.gridx = 6;
+		gbc_talkbox.gridy = 0;
+		contentPane.add(talkbox, gbc_talkbox);
 		contentPane.add(btn1, gbc_btn1);
-		
-		
-		JToggleButton btn2 = new JToggleButton("toggle2");
+		talkbox.setForeground(Color.blue);
+	
+		JToggleButton btn2 = new JToggleButton("Sound 2");
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(btn2.isSelected()){
@@ -120,7 +130,7 @@ public class Sound extends JFrame {
 		gbc_btn2.gridy = 1;
 		contentPane.add(btn2, gbc_btn2);
 		
-		JToggleButton btn3 = new JToggleButton("toggle 3");
+		JToggleButton btn3 = new JToggleButton("Sound 3");
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btn3.isSelected()){
@@ -139,7 +149,7 @@ public class Sound extends JFrame {
 		contentPane.add(btn3, gbc_btn3);
 
 		
-		JToggleButton btn4 = new JToggleButton("toggle4");
+		JToggleButton btn4 = new JToggleButton("Sound 4");
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btn4.isSelected()){
@@ -200,6 +210,8 @@ public class Sound extends JFrame {
 		gbc_btnStop.gridx = 10;
 		gbc_btnStop.gridy = 1;
 		contentPane.add(btnStop, gbc_btnStop);
+		
+
    
 	}
 	
@@ -251,3 +263,4 @@ public class Sound extends JFrame {
 
 
 }
+
