@@ -42,8 +42,19 @@ public class TalkBoxConfigurationGUI extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		
-		JButton btnRecordAudio = new JButton("Record Audio");
-		panel.add(btnRecordAudio);
+		JToggleButton record = new JToggleButton("Record");
+		record.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 if (record.isSelected()) {
+                     Helpers.startRecording();
+                     record.setText("Stop");
+                 } else {
+                     Helpers.stopRecording();
+                     record.setText("Record");
+                 }
+			}
+		});
+		panel.add(record);
 		
 		JMenu mnNewMenu_2 = new JMenu("Load Audio Button 1");
 		panel.add(mnNewMenu_2);
