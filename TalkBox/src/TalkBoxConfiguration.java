@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
+import javax.swing.JToggleButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TalkBoxConfiguration extends JFrame {
 
@@ -42,8 +45,19 @@ public class TalkBoxConfiguration extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		
-		JButton btnRecordAudio = new JButton("Record Audio");
-		panel.add(btnRecordAudio);
+		JToggleButton record = new JToggleButton("Record");
+		record.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 if (record.isSelected()) {
+                     Helpers.startRecording();
+                     record.setText("Stop");
+                 } else {
+                     Helpers.stopRecording();
+                     record.setText("Record");
+                 }
+			}
+		});
+		panel.add(record);
 		
 		JMenu mnNewMenu_2 = new JMenu("Load Audio Button 1");
 		panel.add(mnNewMenu_2);
