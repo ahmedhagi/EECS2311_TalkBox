@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,8 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-=======
->>>>>>> branch 'master' of https://github.com/persaud29/EECS2311_TalkBox
+
 
 import java.io.Serializable;
 import java.nio.file.Path;
@@ -28,7 +26,6 @@ import java.nio.file.Path;
  */
 public interface TalkBoxConfiguration extends Serializable {
 
-<<<<<<< HEAD
 	/**
 	 * Launch the application.
 	 */
