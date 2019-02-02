@@ -6,6 +6,23 @@ public class TalkBox implements TalkBoxConfiguration {
 	private int numberofAudioButton;
 	private int numberofAudiosets;
 	private String[][] AudioFileNames;
+	
+	
+	public void setNumberOfAudioButtons(int numberofAudioButton) {
+		// TODO Auto-generated method stub
+		this.numberofAudioButton=numberofAudioButton;
+	}
+
+	public void setNumberOfAudiosets(int NumberOfAudiosets) {
+		// TODO Auto-generated method stub
+		this.numberofAudiosets = NumberOfAudiosets;
+	}
+
+	public void setAudioFileNames(String[][] AudioFileNames) {
+		// TODO Auto-generated method stub
+		this.AudioFileNames= AudioFileNames;
+	}
+
 	@Override
 	public int getNumberOfAudioButtons() {
 		// TODO Auto-generated method stub
