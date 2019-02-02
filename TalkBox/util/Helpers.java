@@ -45,14 +45,10 @@ public class Helpers {
                         line.open(format);
                         line.start();   // start capturing
 
-                        System.out.println("In utils.Recorder: Start capturing...");
 
                         AudioInputStream ais = new AudioInputStream(line);
 
-                        System.out.println("In utils.Recorder: Start recording...");
-
                         // start recording
-                        System.out.println("Is recoding");
                         AudioSystem.write(ais, FILE_TYPE, new File("Test.wav"));
 
                     } catch (LineUnavailableException ex) {
@@ -61,7 +57,7 @@ public class Helpers {
                         ioe.printStackTrace();
                     }
 
-                    System.out.println("Recording is done");
+      
                 }
             });
             t.start();
