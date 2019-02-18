@@ -52,6 +52,7 @@ public class AudioSelectionPanel extends JPanel {
 		controller = new Controller();
 		audioset = new ArrayList<String>();
 		
+		
 		//Setup Combo Box
 				comboModel = new DefaultComboBoxModel();
 				comboModel.addElement("");
@@ -116,8 +117,8 @@ public class AudioSelectionPanel extends JPanel {
 		add_set.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addAudioSet();
-				controller.addAudioSet(audioset);
-				
+				controller.addAudioSet(new ArrayList<>(audioset));
+				audioset.clear();
 			}
 			
 		});
