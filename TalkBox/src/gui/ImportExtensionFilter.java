@@ -18,7 +18,7 @@ public class ImportExtensionFilter extends FileFilter{
 		if(ext == null) {
 			return false;
 		}
-		if(ext.equals("tbc")) {
+		if(ext.equals(".tbc")) {
 			return true;
 		}
 		return false;

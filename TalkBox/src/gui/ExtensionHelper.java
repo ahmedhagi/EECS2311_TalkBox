@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.LinkedList;
+
 public class ExtensionHelper {
 
 	public static String getFileExtension(String name) {
