@@ -1,14 +1,19 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import controller.Controller;
 import utils.Stereo;
@@ -22,6 +27,8 @@ public class MainFrame extends JFrame {
 	private Stereo audioPlayer;
 	private MainFrameSim mfs;
 	
+	private JFileChooser jfilechooser;
+	
 	public MainFrame() {
 		super("TalkBox Configurator");
 		setLayout(new BorderLayout());
@@ -31,11 +38,15 @@ public class MainFrame extends JFrame {
 		audioSelectionPanel = new AudioSelectionPanel();
 		toolBar = new ToolBar();
 		setupPanel = new SetupPanel();
-		controller = new Controller();
+		controller = audioSelectionPanel.controller;
 		audioPlayer = new Stereo();
 		toolBarS = new ToolBarS();
-		mfs = new MainFrameSim();
+		mfs = new MainFrameSim(controller);
+		String s=System.getProperty("user.dir"); 
+		jfilechooser = new JFileChooser(s);
+		jfilechooser.addChoosableFileFilter(new ImportExtensionFilter());
 
+	
 		
 		//Actions
 		
@@ -44,13 +55,14 @@ public class MainFrame extends JFrame {
 			public void setAudioSelection(int n) {
 				String[][] audioFileSet = controller.getFileNames();
 				String[] audioSet = audioFileSet[n];
-				audioSelectionPanel.setJList(audioSet);
-				mfs.setIdx(n);
-				mfs.setButtons(n);
-				mfs.setSwapButtons();
+				audioSelectionPanel.setJList(audioSet); //setting 
+			  mfs.setIdx(n);
+			  mfs.setButtons(n);
+		      mfs.setSwapButtons();
 			}
 			
 		});
+		
 		
 		audioSelectionPanel.setPlayListener(new PlayListener() {
 			
@@ -88,6 +100,7 @@ public class MainFrame extends JFrame {
 		add(toolBar, BorderLayout.NORTH);
 		add(setupPanel, BorderLayout.CENTER);
 		add(toolBarS, BorderLayout.SOUTH);		
+		
 	}
 	
 	
@@ -113,6 +126,12 @@ public class MainFrame extends JFrame {
 		fileMenu.add(exitItem);
 		
 		menuBar.add(fileMenu);
+				
+		importDataItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				jfilechooser.showOpenDialog(MainFrame.this);
+			}
+		});
 		
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

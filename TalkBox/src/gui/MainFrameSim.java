@@ -22,24 +22,24 @@ import utils.Stereo;
 
 public class MainFrameSim extends JFrame {
 	
-	private Controller controller;
+	
 	private Stereo audioPlayer;
 	private int idx;
 	private Map<Integer, String> map = new HashMap<>();
 	private JPanel buttonPanel;
 	private boolean swap1Pressed = false;
 	private boolean swap2Pressed = false;
-	
+	private Controller controller;
 	
 
-	public MainFrameSim() {
+	public MainFrameSim(Controller controller) {
 		super("TalkBox Simulator");
 		setVisible(false);
 		setLayout(new BorderLayout());
 		setJMenuBar(createMenuBar());
+		this.controller= controller;
 		
 		
-		controller = new Controller();
 		audioPlayer = new Stereo();
 	}
 	
