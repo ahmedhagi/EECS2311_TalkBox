@@ -52,7 +52,7 @@ public class AudioSelectionPanel extends JPanel {
 		setButton = new JButton("Select >>");
 		add_set = new JButton("Add Set");
 		removeset = new JButton("Remove");
-		undo = new JButton("Clear");
+		undo = new JButton("<< Clear");
 		checkBox = new JCheckBox();
 		setButton.setEnabled(false);
 		add_set.setEnabled(false);
@@ -91,8 +91,13 @@ public class AudioSelectionPanel extends JPanel {
 		checkBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean isChecked = checkBox.isSelected();
-				setButton.setEnabled(isChecked);
-				add_set.setEnabled(isChecked);
+				if (isChecked) {
+					setButton.setEnabled(isChecked);
+					add_set.setEnabled(isChecked);
+				} else {
+					undo.setEnabled(false);
+				}
+				
 			}
 
 		});
@@ -116,6 +121,7 @@ public class AudioSelectionPanel extends JPanel {
 				checkBox.setSelected(false);
 				setButton.setEnabled(false);
 				add_set.setEnabled(false);
+				undo.setEnabled(false);
 				
 				if (addListener != null) {
 					addListener.clearSetup(true);
