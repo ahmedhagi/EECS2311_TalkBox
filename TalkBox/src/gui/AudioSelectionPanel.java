@@ -39,6 +39,9 @@ public class AudioSelectionPanel extends JPanel {
 	private DefaultComboBoxModel comboModel;
 	ArrayList<String> audioset;
 	private RemoveListener removeListener;
+	private JButton undo;
+	private ClearListener clearListener;
+	private AddListener addListener;
 
 	public AudioSelectionPanel() {
 		// initialize
@@ -46,12 +49,14 @@ public class AudioSelectionPanel extends JPanel {
 		audioSelection = new JComboBox();
 		audioList = new JList();
 		playButton = new JButton("Play");
-		setButton = new JButton("Select");
+		setButton = new JButton("Select >>");
 		add_set = new JButton("Add Set");
 		removeset = new JButton("Remove");
+		undo = new JButton("Clear");
 		checkBox = new JCheckBox();
 		setButton.setEnabled(false);
 		add_set.setEnabled(false);
+		undo.setEnabled(false);
 		isChecked = false;
 		controller = new Controller();
 		audioset = new ArrayList<String>();
@@ -94,10 +99,10 @@ public class AudioSelectionPanel extends JPanel {
 		setButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String selection = (String) audioList.getSelectedValue();
-				audioset.add((String) audioList.getSelectedValue());
 				int idx = audioSelection.getSelectedIndex();
-				if (setListener != null) {
+				if (setListener != null && selection != null) {
 					setListener.setup(idx, selection);
+					audioset.add((String) audioList.getSelectedValue());
 				}
 			}
 
@@ -108,6 +113,13 @@ public class AudioSelectionPanel extends JPanel {
 				addAudioSet();
 				controller.addAudioSet(new LinkedList<>(audioset));
 				audioset.clear();
+				checkBox.setSelected(false);
+				setButton.setEnabled(false);
+				add_set.setEnabled(false);
+				
+				if (addListener != null) {
+					addListener.clearSetup(true);
+				}
 			}
 
 		});
@@ -123,6 +135,17 @@ public class AudioSelectionPanel extends JPanel {
 
 			}
 
+		});
+		
+		undo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (clearListener != null) {
+					clearListener.clear(true);
+					audioset.clear();
+					undo.setEnabled(false);
+				}
+				
+			}
 		});
 
 		Border innerBorder = BorderFactory.createTitledBorder("Select Audio");
@@ -148,6 +171,15 @@ public class AudioSelectionPanel extends JPanel {
 	public void setSetListener(SetListener listener) {
 		this.setListener = listener;
 	}
+	
+	public void setClearListener(ClearListener listener) {
+		this.clearListener = listener;
+	}
+	
+	public void setAddListener(AddListener listener) {
+		this.addListener = listener;
+	}
+
 
 	public List<String> getnewaudiolist() {
 		return audioset;
@@ -246,6 +278,11 @@ public class AudioSelectionPanel extends JPanel {
 		gc.gridx = 0;
 		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		add(removeset, gc);
+		
+		
+		gc.gridx = 1;
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
+		add(undo, gc);
 
 		/* Next Row */
 		gc.gridy++;
@@ -280,6 +317,14 @@ public class AudioSelectionPanel extends JPanel {
 		audioList.setBorder(BorderFactory.createEtchedBorder());
 		//audioList.setSelectedIndex(0);
 
+	}
+	
+	public void turnOffUndo() {
+		undo.setEnabled(false);
+	}
+	
+	public void turnOnUndo() {
+		undo.setEnabled(true);
 	}
 
 }

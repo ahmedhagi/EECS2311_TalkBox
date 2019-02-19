@@ -79,10 +79,23 @@ public class MainFrame extends JFrame {
 		
 		audioSelectionPanel.setSetListener(new SetListener() {
 			public void setup(int idx, String fileName) {
-				if (audioSelectionPanel.isChecked()) {
+				if (audioSelectionPanel.isChecked() && fileName != null) {
 					setupPanel.appendText(fileName + "\n");
+					if(!setupPanel.isEmpty()) {
+						audioSelectionPanel.turnOnUndo();
+					}
 				} else {
 					
+				}
+			}
+			
+		});
+		
+		audioSelectionPanel.setClearListener(new ClearListener() {
+
+			public void clear(boolean b) {
+				if (b) {
+					setupPanel.removeText();
 				}
 			}
 			
@@ -95,6 +108,16 @@ public class MainFrame extends JFrame {
 				controller.removeAudio(idx, file);
 				refreshJList(idx);
 				setupSim(idx);
+			}
+			
+		});
+		
+		audioSelectionPanel.setAddListener(new AddListener() {
+			public void clearSetup(boolean b) {
+				if (b) {
+					setupPanel.removeText();
+				}
+				
 			}
 			
 		});
