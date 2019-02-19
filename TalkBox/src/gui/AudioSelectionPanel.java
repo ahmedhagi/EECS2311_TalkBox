@@ -115,7 +115,13 @@ public class AudioSelectionPanel extends JPanel {
 				int n = audioSelection.getSelectedIndex();
 				controller.removeAudioSet(n-1); 
 				refre_audio();
-				audioSelection.setSelectedIndex(n);
+				
+				/*gets indexException when it comes to first audio set. * just to make things more clean. can be erased */
+				if(n==controller.getNumberOfAudioSets()+1) {
+					audioSelection.setSelectedIndex(n-1);
+				}else {
+				 audioSelection.setSelectedIndex(n);
+				}
 
 			}
 
