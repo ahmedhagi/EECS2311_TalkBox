@@ -37,6 +37,7 @@ public class MainFrame extends JFrame {
 		
 		//Initialize
 		audioSelectionPanel = new AudioSelectionPanel();
+		audioSelectionPanel.def_audioset();
 		toolBar = new ToolBar();
 		setupPanel = new SetupPanel();
 		controller = audioSelectionPanel.controller;
@@ -70,7 +71,7 @@ public class MainFrame extends JFrame {
 			
 			public void setFileName(int idx, String fileName) {
 				String path = controller.getPath().toString();
-				String completePath = path + "\\" + "set" + idx + "\\" + fileName;
+				String completePath = path + "\\" + "set" + idx + "\\" + fileName; //**
 				audioPlayer.playMusic(completePath);
 			}
 		});
@@ -137,13 +138,35 @@ public class MainFrame extends JFrame {
 		fileMenu.add(exitItem);
 		
 		menuBar.add(fileMenu);
-				
 		importDataItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				jfilechooser.showOpenDialog(MainFrame.this);
+				if(jfilechooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
+					try {
+						controller.load(jfilechooser.getSelectedFile());
+						audioSelectionPanel.refre_audio();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
-		
+		exportDataItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				if(jfilechooser.showSaveDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
+					try {
+						controller.save(jfilechooser.getSelectedFile());
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+
+				
+	
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int action = JOptionPane.showConfirmDialog(MainFrame.this, "Exit?", "Yes", JOptionPane.OK_CANCEL_OPTION);

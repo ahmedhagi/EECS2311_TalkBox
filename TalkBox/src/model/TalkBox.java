@@ -37,6 +37,10 @@ public class TalkBox implements TalkBoxConfiguration {
 		  set4.add("Alright.wav"); audioFileNames.add(3, set4);
 	
 	}
+	public void removeAudioFile(int n) { 
+		this.audioFileNames.get(n).clear();
+		 this.audioFileNames.remove(this.audioFileNames.get(n));
+	}
 
 	public void setAudioFileNames(List<String> audioFilesNames) { //export ÇÒ¶§.
 		this.audioFileNames.add(audioFilesNames);
