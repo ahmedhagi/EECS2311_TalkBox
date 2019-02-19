@@ -10,11 +10,13 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import controller.Controller;
@@ -30,7 +32,7 @@ public class MainFrameSim extends JFrame {
 	private boolean swap1Pressed = false;
 	private boolean swap2Pressed = false;
 	private Controller controller;
-	
+	private JLabel label = new JLabel();
 
 	public MainFrameSim(Controller controller) {
 		super("TalkBox Simulator");
@@ -59,6 +61,9 @@ public class MainFrameSim extends JFrame {
 			this.remove(buttonPanel);
 			this.idx = idx;
 		}
+		label.setText("Audio Set " + (idx + 1));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(label, BorderLayout.NORTH);
 		String[][] audioFileSet = controller.getFileNames();
 		String[] audioSet = audioFileSet[idx];
 		JPanel panel = new JPanel();
