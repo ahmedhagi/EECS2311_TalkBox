@@ -65,10 +65,9 @@ public class AudioSelectionPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (selectionListener != null) {
 					int selection = audioSelection.getSelectedIndex();
-
 					if (selection > 0) {
 						selectionListener.setAudioSelection(selection - 1);
-					}
+					} 
 				}
 			}
 		});
@@ -117,7 +116,7 @@ public class AudioSelectionPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int n = audioSelection.getSelectedIndex() - 1;
 				String file = (String) audioList.getSelectedValue();
-				if (removeListener != null) {
+				if (removeListener != null && n >= 0) {
 					removeListener.setRemoveInfo(n, file);
 				}
 				
@@ -187,7 +186,7 @@ public class AudioSelectionPanel extends JPanel {
 		comboModel.addElement("Audio Set 4");
 		numofaudioset++;
 		audioSelection.setModel(comboModel);
-		audioSelection.setSelectedIndex(1);
+		audioSelection.setSelectedIndex(0);
 
 	}
 
