@@ -54,19 +54,19 @@ public class AudioSelectionPanel extends JPanel {
 		
 		
 		//Setup Combo Box
-				comboModel = new DefaultComboBoxModel();
-				comboModel.addElement("");
-				numofaudioset ++;
-				comboModel.addElement("Audio Set 1");
-				numofaudioset ++;
-				comboModel.addElement("Audio Set 2");
-				numofaudioset ++;
-				comboModel.addElement("Audio Set 3");
-				numofaudioset ++;
-				comboModel.addElement("Audio Set 4");
-				numofaudioset ++;
-				audioSelection.setModel(comboModel);
-				audioSelection.setSelectedIndex(1);
+		comboModel = new DefaultComboBoxModel();
+		comboModel.addElement("");
+		numofaudioset ++;
+		comboModel.addElement("Audio Set 1");
+		numofaudioset ++;
+		comboModel.addElement("Audio Set 2");
+		numofaudioset ++;
+		comboModel.addElement("Audio Set 3");
+		numofaudioset ++;
+		comboModel.addElement("Audio Set 4");
+		numofaudioset ++;
+		audioSelection.setModel(comboModel);
+		audioSelection.setSelectedIndex(0);
 		
 
 		

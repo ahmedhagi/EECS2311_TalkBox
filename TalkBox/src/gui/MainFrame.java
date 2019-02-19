@@ -28,6 +28,7 @@ public class MainFrame extends JFrame {
 	private MainFrameSim mfs;
 	
 	private JFileChooser jfilechooser;
+	private RecordDialog recordDialog;
 	
 	public MainFrame() {
 		super("TalkBox Configurator");
@@ -45,6 +46,7 @@ public class MainFrame extends JFrame {
 		String s=System.getProperty("user.dir"); 
 		jfilechooser = new JFileChooser(s);
 		jfilechooser.addChoosableFileFilter(new ImportExtensionFilter());
+		recordDialog = new RecordDialog(this);
 
 	
 		
@@ -91,6 +93,15 @@ public class MainFrame extends JFrame {
 					MainFrame.this.setVisible(false);
 					toolBarS.turnOffStartButton();
 					
+				}
+			}
+		});
+		
+		toolBar.setRecord(new InitiateSim() {
+			@Override
+			public void shouldStart(boolean b) {
+				if (b) {
+					recordDialog.setVisible(true);
 				}
 			}
 		});

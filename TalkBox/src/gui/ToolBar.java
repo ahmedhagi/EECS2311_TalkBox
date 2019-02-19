@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 public class ToolBar extends JPanel implements ActionListener {
 	JButton recordButton;
+	InitiateSim sim;
 	
 	public ToolBar() {
 		setBorder(BorderFactory.createEtchedBorder());
@@ -20,11 +21,17 @@ public class ToolBar extends JPanel implements ActionListener {
 		add(recordButton);
 	}
 	
+	public void setRecord (InitiateSim sim) {
+		this.sim = sim;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton clicked = (JButton) e.getSource();
 		if (clicked == recordButton) {
-			System.out.println("Record button pressed");
+			if (this.sim != null) {
+				sim.shouldStart(true);
+			}
+			
 		}
 		
 	}
