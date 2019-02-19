@@ -29,6 +29,7 @@ public class MainFrame extends JFrame {
 	
 	private JFileChooser jfilechooser;
 	private RecordDialog recordDialog;
+	private JFrame reference;
 	
 	public MainFrame() {
 		super("TalkBox Configurator");
@@ -48,20 +49,20 @@ public class MainFrame extends JFrame {
 		jfilechooser = new JFileChooser(s);
 		jfilechooser.addChoosableFileFilter(new ImportExtensionFilter());
 		recordDialog = new RecordDialog(this);
+		reference = this;
+		toolBarS.turnOffStart();
 
 	
 		
 		//Actions
 		
-	
+		
 		audioSelectionPanel.setSelectionListener(new SelectionListener() {
 			public void setAudioSelection(int n) {
-				String[][] audioFileSet = controller.getFileNames();
-				String[] audioSet = audioFileSet[n];
-				audioSelectionPanel.setJList(audioSet); //setting 
-			  mfs.setIdx(n);
-			  mfs.setButtons(n);
-		      mfs.setSwapButtons();
+				refreshJList(n);
+			  setupSim(n);
+		      recordDialog.setAudioIndex(n);
+		      toolBarS.turnOnStart();
 			}
 			
 		});
@@ -87,6 +88,17 @@ public class MainFrame extends JFrame {
 			
 		});
 		
+		audioSelectionPanel.setRemoveListener(new RemoveListener() {
+
+			@Override
+			public void setRemoveInfo(int idx, String file) {
+				controller.removeAudio(idx, file);
+				refreshJList(idx);
+				setupSim(idx);
+			}
+			
+		});
+		
 		toolBarS.setInitListener(new InitiateSim() {
 			public void shouldStart(boolean b) {
 				if (b) {
@@ -105,6 +117,17 @@ public class MainFrame extends JFrame {
 					recordDialog.setVisible(true);
 				}
 			}
+		});
+		
+		recordDialog.setSetListener(new SetListener() {
+
+			@Override
+			public void setup(int idx, String fileName) {
+				controller.addAudio(idx, fileName);
+				refreshJList(idx);
+				setupSim(idx);
+			}
+			
 		});
 		
 		//Add
@@ -178,6 +201,18 @@ public class MainFrame extends JFrame {
 		});
 		
 		return menuBar;
+	}
+	
+	public void refreshJList(int idx) {
+		String[][] audioFileSet = controller.getFileNames();
+		String[] audioSet = audioFileSet[idx];
+		audioSelectionPanel.setJList(audioSet); //setting 
+	}
+	
+	public void setupSim(int n) {
+		  mfs.setIdx(n);
+		  mfs.setButtons(n);
+	      mfs.setSwapButtons();
 	}
 	
 }

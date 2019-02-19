@@ -21,10 +21,7 @@ public class Controller {
 		
 	}
 	
-	public void removeAudioSet(int n) {
-		talkbox.removeAudioFile(n);
-		
-	}
+
 	public void addAudioSet(List<String> audioset) {
 		talkbox.setAudioFileNames(audioset);
 		
@@ -43,6 +40,18 @@ public class Controller {
 	
 	public int getNumberOfButtons() {
 		return talkbox.getNumberOfAudioButtons();
+	}
+	
+	public void addAudio(int idx, String fileName) {
+		talkbox.addAudio(idx, fileName);
+	}
+	
+	public List<String> getAudioList (int idx) {
+		return talkbox.getAudioList(idx);
+	}
+	
+	public void removeAudio(int idx, String fileName) {
+		talkbox.removeAudio(idx, fileName);
 	}
 	public void save(File file) throws Exception {
 		FileOutputStream fileOutputStream = new FileOutputStream(file);

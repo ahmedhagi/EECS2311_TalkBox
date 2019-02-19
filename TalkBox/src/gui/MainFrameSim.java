@@ -129,8 +129,6 @@ public class MainFrameSim extends JFrame {
 					setButtons(++MainFrameSim.this.idx);
 				
 				}
-				
-				
 				MainFrameSim.this.revalidate();
 				MainFrameSim.this.repaint();
 			}

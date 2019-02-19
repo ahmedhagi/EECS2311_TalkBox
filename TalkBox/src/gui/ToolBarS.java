@@ -41,4 +41,12 @@ public class ToolBarS extends JPanel implements ActionListener {
 		}
 		
 	}
+	
+	public void turnOffStart() {
+		configButton.setEnabled(false);
+	}
+	
+	public void turnOnStart() {
+		configButton.setEnabled(true);
+	}
 }

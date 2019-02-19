@@ -3,6 +3,8 @@ package gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -10,11 +12,30 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+import playground.Helpers;
+import utils.Recorder;
+
 public class RecordDialog extends JDialog {
 	
 	private JTextField audioFileName;
 	private JToggleButton recordButton;
+	private int audioIndex;
+	private String fileName;
+	private Recorder recorder;
+	private SetListener setListener;
 	
+	public int getAudioIndex() {
+		return audioIndex;
+	}
+
+	public void setAudioIndex(int audioIndex) {
+		this.audioIndex = audioIndex;
+	}
+	
+	public void setSetListener(SetListener listener) {
+		this.setListener = listener;
+	}
+
 	public RecordDialog(JFrame parent) {
 		super(parent, "Record...", false);
 		setLayout(new GridBagLayout());
@@ -22,8 +43,35 @@ public class RecordDialog extends JDialog {
 		
 		audioFileName = new JTextField(10);
 		recordButton = new JToggleButton("Record");
+		recorder = new Recorder();
 		
-		
+		recordButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RecordDialog.this.fileName = audioFileName.getText();
+				JToggleButton button = (JToggleButton) e.getSource();
+				if (button == recordButton) {
+					if (button.isSelected()) {
+						String path = System.getProperty("user.dir");
+						String completeFileSource = path + "\\src\\audio\\" + RecordDialog.this.fileName + ".wav";
+						recorder.startRecording(completeFileSource);
+						button.setText("Stop");
+						
+					} else {
+						recorder.stopRecording();
+						button.setText("Record");
+						if (RecordDialog.this.setListener != null) {
+							RecordDialog.this.setListener.setup(RecordDialog.this.audioIndex, RecordDialog.this.fileName + ".wav");
+						}
+						audioFileName.setText("");
+					}
+				}
+				
+				
+				
+			}
+			
+		});
 		
 		gc.gridy = 0;
 		
@@ -64,3 +112,4 @@ public class RecordDialog extends JDialog {
 		
 	}
 }
+

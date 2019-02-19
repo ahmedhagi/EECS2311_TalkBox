@@ -5,6 +5,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -17,10 +20,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import controller.Controller;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import controller.Controller;
 
 public class AudioSelectionPanel extends JPanel {
@@ -39,6 +38,7 @@ public class AudioSelectionPanel extends JPanel {
 	private int numofaudioset;
 	private DefaultComboBoxModel comboModel;
 	ArrayList<String> audioset;
+	private RemoveListener removeListener;
 
 	public AudioSelectionPanel() {
 		// initialize
@@ -47,16 +47,17 @@ public class AudioSelectionPanel extends JPanel {
 		audioList = new JList();
 		playButton = new JButton("Play");
 		setButton = new JButton("Set");
-		add_set = new JButton("add");
-		removeset = new JButton("remove");
+		add_set = new JButton("Add Set");
+		removeset = new JButton("Remove");
 		checkBox = new JCheckBox();
 		setButton.setEnabled(false);
 		isChecked = false;
 		controller = new Controller();
 		audioset = new ArrayList<String>();
+
 		
 
-		// Setup Combo Box
+	
 
 		// Actions
 		audioSelection.addActionListener(new ActionListener() {
@@ -104,7 +105,7 @@ public class AudioSelectionPanel extends JPanel {
 		add_set.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addAudioSet();
-				controller.addAudioSet(new ArrayList<>(audioset));
+				controller.addAudioSet(new LinkedList<>(audioset));
 				audioset.clear();
 			}
 
@@ -112,16 +113,12 @@ public class AudioSelectionPanel extends JPanel {
 
 		removeset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int n = audioSelection.getSelectedIndex();
-				controller.removeAudioSet(n-1); 
-				refre_audio();
-				
-				/*gets indexException when it comes to first audio set. * just to make things more clean. can be erased */
-				if(n==controller.getNumberOfAudioSets()+1) {
-					audioSelection.setSelectedIndex(n-1);
-				}else {
-				 audioSelection.setSelectedIndex(n);
+				int n = audioSelection.getSelectedIndex() - 1;
+				String file = (String) audioList.getSelectedValue();
+				if (removeListener != null) {
+					removeListener.setRemoveInfo(n, file);
 				}
+				
 
 			}
 
@@ -137,7 +134,12 @@ public class AudioSelectionPanel extends JPanel {
 	public void setSelectionListener(SelectionListener listener) {
 		this.selectionListener = listener;
 	}
-
+	
+	
+	
+	public void setRemoveListener(RemoveListener listener) {
+		this.removeListener = listener;
+	}
 	public void setPlayListener(PlayListener listener) {
 		this.playListener = listener;
 	}
@@ -228,12 +230,12 @@ public class AudioSelectionPanel extends JPanel {
 		gc.gridx = 0;
 		gc.insets = new Insets(0, 0, 0, 5);
 		gc.anchor = GridBagConstraints.FIRST_LINE_START;
-		add(setButton, gc);
+		add(add_set, gc);
 
 		gc.gridx = 1;
 		gc.insets = new Insets(0, 0, 0, 0);
 		gc.anchor = GridBagConstraints.FIRST_LINE_START;
-		add(add_set, gc);
+		add(setButton, gc);
 
 		/* Next Row */
 		gc.weightx = 1;
@@ -275,7 +277,7 @@ public class AudioSelectionPanel extends JPanel {
 		audioList.setModel(listModel);
 		// audioList.setPreferredSize(new Dimension(110, 68));
 		audioList.setBorder(BorderFactory.createEtchedBorder());
-		audioList.setSelectedIndex(0);
+		//audioList.setSelectedIndex(0);
 
 	}
 
