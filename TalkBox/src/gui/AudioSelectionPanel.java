@@ -46,11 +46,12 @@ public class AudioSelectionPanel extends JPanel {
 		audioSelection = new JComboBox();
 		audioList = new JList();
 		playButton = new JButton("Play");
-		setButton = new JButton("Set");
+		setButton = new JButton("Select");
 		add_set = new JButton("Add Set");
 		removeset = new JButton("Remove");
 		checkBox = new JCheckBox();
 		setButton.setEnabled(false);
+		add_set.setEnabled(false);
 		isChecked = false;
 		controller = new Controller();
 		audioset = new ArrayList<String>();
@@ -87,6 +88,7 @@ public class AudioSelectionPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				boolean isChecked = checkBox.isSelected();
 				setButton.setEnabled(isChecked);
+				add_set.setEnabled(isChecked);
 			}
 
 		});
