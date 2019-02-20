@@ -10,9 +10,7 @@ public class TalkBox implements TalkBoxConfiguration {
 	// Database where the audio sets are stored. It's a LinkedList (database) containing the 
 	private List<List<String>> audioFileNames;
 	
-	/**
-	 * Constructor shenanigans
-	 */
+	// Constructor
 	public TalkBox() {
 		audioFileNames = new LinkedList<>();
 		setDefaultAudioset();
@@ -45,7 +43,7 @@ public class TalkBox implements TalkBoxConfiguration {
 	}
 
 	/**
-	 * sets audioFileNames as the one provided
+	 * adds an audio set to the current database of audio sets
 	 * @param audioFilesNames
 	 */
 	public void setAudioFileNames(List<String> audioFilesNames) { //export ÇÒ¶§.
