@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,10 +31,12 @@ public class MainFrame extends JFrame {
 	private JFileChooser jfilechooser;
 	private RecordDialog recordDialog;
 	private JFrame reference;
+	private final JPanel east_panel = new JPanel();
 	
 	public MainFrame() {
 		super("TalkBox Configurator");
-		setLayout(new BorderLayout());
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		getContentPane().setLayout(new BorderLayout());
 		setJMenuBar(createMenuBar());
 		
 		//Initialize
@@ -154,10 +157,32 @@ public class MainFrame extends JFrame {
 		});
 		
 		//Add
-		add(audioSelectionPanel, BorderLayout.WEST);
-		add(toolBar, BorderLayout.NORTH);
-		add(setupPanel, BorderLayout.CENTER);
-		add(toolBarS, BorderLayout.SOUTH);		
+		getContentPane().add(audioSelectionPanel, BorderLayout.WEST);
+		getContentPane().add(east_panel, BorderLayout.EAST);
+		
+		JButton btn1 = new JButton("New button");
+		btn1.setPreferredSize(new Dimension(100, 100));
+		east_panel.add(btn1);
+		
+		JButton btn2 = new JButton("New button");
+		btn2.setPreferredSize(new Dimension(100, 100));
+		east_panel.add(btn2);
+		
+		JButton btn3 = new JButton("New button");
+		btn3.setPreferredSize(new Dimension(100, 100));
+		east_panel.add(btn3);
+		
+		JButton btn4 = new JButton("New button");
+		btn4.setPreferredSize(new Dimension(100, 100));
+		east_panel.add(btn4);
+		
+		JButton btn5 = new JButton("New button");
+		btn5.setPreferredSize(new Dimension(100, 100));
+		east_panel.add(btn5);
+		
+		getContentPane().add(toolBar, BorderLayout.NORTH);
+		getContentPane().add(setupPanel, BorderLayout.CENTER);
+		getContentPane().add(toolBarS, BorderLayout.SOUTH);		
 		
 	}
 	
