@@ -116,11 +116,11 @@ public class MainFrameSim extends JFrame {
 			
 		});
 		
-		JButton swap2 = new JButton("2");
+		JButton swap2 = new JButton("Swap");
 		swap2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JButton button = (JButton) e.getSource();
-				int swapIdx = Integer.parseInt(button.getText());
+				int swapIdx = 2;
 				swapIdx--;
 				if (swap1Pressed || !swap2Pressed) {
 					setButtons(swapIdx);
