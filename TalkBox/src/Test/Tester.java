@@ -30,47 +30,84 @@ public class Tester {
 		bot = new Robot();
 	}
 	
-	@Test
-	public void testAudioSelectionPanel() {
-		
-	}
-	
-	@Test
-	public void testTalkBox() {
-		setup();
+	public List<String> setupTestSet() {
 		List<String> testSet = new LinkedList<>();
 		testSet.add("hi.wav");
 		testSet.add("goodbye.wav");
 		testSet.add("excuseme.wav");
 		testSet.add("time.wav");
 		testSet.add("thankyou.wav");
-		assertEquals(talkbox.getAudioList(0), testSet, "default test set was not successfully added");
-		assertEquals(talkbox.getNumberOfAudioButtons(), 5, "number of buttons should be 5");
-		assertEquals(talkbox.getNumberOfAudioSets(), 4);
-		talkbox.setAudioFileNames(testSet);
-		assertEquals(talkbox.getNumberOfAudioSets(), 5, "audioFileNames did not grow when set was added");
+		
+		return testSet;
 	}
 	
 	@Test
-	public void testController() {
-		
+	public void test_model_getAudioList() {
+		setup();
+		List<String> tester = setupTestSet();
+		assertEquals(talkbox.getAudioList(0), tester, "default test set was not successfully added");
+	}
+	
+	@Test
+	public void test_model_getNumberOfAudioButtons() {
+		setup();
+		assertEquals(talkbox.getNumberOfAudioButtons(), 5, "number of buttons should be 5");
+	}
+	
+	@Test
+	public void test_model_getNumberOfAudioSets() {
+		setup();
+		List<String> tester = setupTestSet();
+		setupTestSet();
+		assertEquals(talkbox.getNumberOfAudioSets(), 4);
+	}
+	
+	@Test
+	public void test_model_setAudioFileNames() {
+		setup();
+		List<String> tester = setupTestSet();
+		setupTestSet();
+		talkbox.setAudioFileNames(tester);
+		assertEquals(talkbox.getNumberOfAudioSets(), 5, "audioFileNames did not grow when set was added");
+		assertEquals(talkbox.getAudioList(4).contains("hi.wav"), true, "audioFileNames should contain hi.wav at the last index");
+	}
+	
+	@Test
+	public void test_controller_addAudioSet() {
 		Controller controller = new Controller();
 		List<String> tester = new LinkedList<>();
 		int oldCount = controller.getNumberOfAudioSets();
 		controller.addAudioSet(tester);
-		assertEquals(controller.getNumberOfAudioSets(), oldCount + 1, "controller did not grow audioFileNames");
-		assertEquals(controller.getAudioList(4), tester, "controller did not add tester successfully");	
-		controller.addAudio(4, "testFile");
-		assertEquals(controller.getAudioList(4).contains("testFile"), true, "tester should contain testFile");
-		controller.removeAudio(4, "testFile");
-		assertEquals(controller.getAudioList(4).contains("testFile"), false, "tester should not contain testFile");
-		assertEquals(controller.getNumberOfButtons(), 5);
+		assertEquals(oldCount + 1, controller.getNumberOfAudioSets(), 
+				"controller did not grow audioFileNames");
+		assertEquals(controller.getAudioList(4), tester, 
+				"controller did not add tester successfully");	
+	}
 	
+	@Test
+	public void test_controller_addAudio() {
+		Controller controller = new Controller();
+		controller.addAudio(0, "testFile");
+		assertEquals(controller.getAudioList(0).contains("testFile"), true, 
+				"tester should contain testFile");
+	}
+	
+	@Test
+	public void test_controller_removeAudio() {
+		Controller controller = new Controller();
+		controller.removeAudio(0, "hi.wav");
+		assertEquals(controller.getAudioList(0).contains("hi.wav"), false, 
+				"hi.wav should have been removed from audioFileNames[0]");
+		
+	}
+	@Test
+	public void test_controller_getNumberOfButtons() {
+		Controller controller = new Controller();
+		assertEquals(controller.getNumberOfButtons(), 5);
 	}
 	
 	@Test
 	public void testGUI() throws AWTException {
-		boolean simulatorStarted = false;
 		setupGUI();
 		Robot bot = new Robot();
 		bot.mouseMove(100, 140);
@@ -82,9 +119,11 @@ public class Tester {
 		bot.mouseMove(120, 110);
 		mouseClick();
 		bot.mouseMove(100, 560);
-		try {Thread.sleep(5000);}catch (InterruptedException e) {}
-		assertEquals(mainframe.getToolBarS().getStarted(), true, "start button was not pressed");
-		assertEquals(mainframe.getMainFrameSim().getSoundPlayed(), true, "sound button was not pressed");
+		try {Thread.sleep(2000);}catch (InterruptedException e) {}
+		assertEquals(mainframe.getToolBarS().getStarted(), true, 
+				"start button was not pressed");
+		assertEquals(mainframe.getMainFrameSim().getSoundPlayed(), true, 
+				"sound button was not pressed");
 	}
 	
 	// bot helper class
