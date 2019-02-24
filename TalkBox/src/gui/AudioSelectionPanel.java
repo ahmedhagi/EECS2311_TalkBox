@@ -24,6 +24,7 @@ import controller.Controller;
 
 public class AudioSelectionPanel extends JPanel {
 	private JComboBox audioSelection;
+	PreviewSelectionPanel psp;
 	private JList audioList;
 	private JButton playButton;
 	private JButton setButton;
@@ -117,6 +118,8 @@ public class AudioSelectionPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				addAudioSet();
 				controller.addAudioSet(new LinkedList<>(audioset));
+				//use controller to generate new preview
+				controller.generatePreview(audioset);
 				audioset.clear();
 				checkBox.setSelected(false);
 				setButton.setEnabled(false);

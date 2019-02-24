@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,13 +9,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
+import gui.PreviewSelectionPanel;
 import model.TalkBox;
 
 public class Controller {
 	
 	private TalkBox talkbox;
+	private MainFrame view;
 	//talkboc save to object  set audiofile and talbox create . 
 	
 	public Controller() {
@@ -82,6 +87,10 @@ public class Controller {
 	 */
 	public void removeAudio(int idx, String fileName) {
 		talkbox.removeAudio(idx, fileName);
+	}
+	
+	public void generatePreview(ArrayList<String> custom) {
+		view.revalidate();
 	}
 	
 	

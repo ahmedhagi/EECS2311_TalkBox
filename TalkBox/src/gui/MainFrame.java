@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -20,6 +21,7 @@ import utils.Stereo;
 
 public class MainFrame extends JFrame {
 	private AudioSelectionPanel audioSelectionPanel;
+	private PreviewSelectionPanel previewSelectionPanel;
 	private ToolBar toolBar;
 	private SetupPanel setupPanel;
 	private ToolBarS toolBarS;
@@ -33,19 +35,20 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		super("TalkBox Configurator");
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		setJMenuBar(createMenuBar());
 		
 		//Initialize
 		audioSelectionPanel = new AudioSelectionPanel();
 		audioSelectionPanel.def_audioset();
+		previewSelectionPanel = new PreviewSelectionPanel();
 		toolBar = new ToolBar();
 		setupPanel = new SetupPanel();
 		controller = audioSelectionPanel.controller;
 		audioPlayer = new Stereo();
 		toolBarS = new ToolBarS();
 		mfs = new MainFrameSim(controller);
-		String s=System.getProperty("user.dir"); 
+		String s = System.getProperty("user.dir"); 
 		jfilechooser = new JFileChooser(s);
 		jfilechooser.addChoosableFileFilter(new ImportExtensionFilter());
 		recordDialog = new RecordDialog(this);
@@ -66,14 +69,17 @@ public class MainFrame extends JFrame {
 			}
 			
 		});
-		
-		
+				
 		audioSelectionPanel.setPlayListener(new PlayListener() {
 			
 			public void setFileName(int idx, String fileName) {
 				String path = controller.getPath().toString();
 				String completePath = path +  "\\" + fileName; //**
 				audioPlayer.playMusic(completePath);
+			}
+			public void generatePreview() {
+				previewSelectionPanel = new PreviewSelectionPanel(audioSelectionPanel.audioset);
+				getContentPane().revalidate();
 			}
 		});
 		
@@ -154,10 +160,11 @@ public class MainFrame extends JFrame {
 		});
 		
 		//Add
-		add(audioSelectionPanel, BorderLayout.WEST);
-		add(toolBar, BorderLayout.NORTH);
-		add(setupPanel, BorderLayout.CENTER);
-		add(toolBarS, BorderLayout.SOUTH);		
+		getContentPane().add(audioSelectionPanel, BorderLayout.WEST);
+		getContentPane().add(toolBar, BorderLayout.NORTH);
+		getContentPane().add(setupPanel, BorderLayout.CENTER);
+		getContentPane().add(toolBarS, BorderLayout.EAST);	
+		getContentPane().add(previewSelectionPanel, BorderLayout.SOUTH);
 		
 	}
 	
@@ -165,7 +172,7 @@ public class MainFrame extends JFrame {
 	
 
 	public void showIt() {
-		setSize(500,600);
+		setSize(1000,1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
@@ -236,6 +243,10 @@ public class MainFrame extends JFrame {
 		  mfs.setIdx(n);
 		  mfs.setButtons(n);
 	      mfs.setSwapButtons();
+	}
+	
+	public void generatePreview(ArrayList<String> custom) {
+		getContentPane().add(new PreviewSelectionPanel(audioSelectionPanel.audioset));
 	}
 	
 }
