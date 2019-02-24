@@ -83,8 +83,8 @@ public class Tester {
 		mouseClick();
 		bot.mouseMove(100, 560);
 		try {Thread.sleep(5000);}catch (InterruptedException e) {}
-		assertEquals(mainframe.getToolBarS().getStarted(), true, "start button pressed");
-		assertEquals(mainframe.getMainFrameSim().getSoundPlayed(), true, "sound played");
+		assertEquals(mainframe.getToolBarS().getStarted(), true, "start button was not pressed");
+		assertEquals(mainframe.getMainFrameSim().getSoundPlayed(), true, "sound button was not pressed");
 	}
 	
 	// bot helper class
