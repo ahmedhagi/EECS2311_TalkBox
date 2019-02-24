@@ -46,14 +46,14 @@ public class MainFrame extends JFrame {
 		setupPanel = new SetupPanel();
 		controller = audioSelectionPanel.controller;
 		audioPlayer = new Stereo();
-		toolBarS = new ToolBarS();
+		setToolBarS(new ToolBarS());
 		mfs = new MainFrameSim(controller);
 		String s = System.getProperty("user.dir"); 
 		jfilechooser = new JFileChooser(s);
 		jfilechooser.addChoosableFileFilter(new ImportExtensionFilter());
 		recordDialog = new RecordDialog(this);
 		reference = this;
-		toolBarS.turnOffStart();
+		getToolBarS().turnOffStart();
 
 	
 		
@@ -65,7 +65,7 @@ public class MainFrame extends JFrame {
 				refreshJList(n);
 			  setupSim(n);
 		      recordDialog.setAudioIndex(n);
-		      toolBarS.turnOnStart();
+		      getToolBarS().turnOnStart();
 			}
 			
 		});
@@ -128,12 +128,12 @@ public class MainFrame extends JFrame {
 			
 		});
 		
-		toolBarS.setInitListener(new InitiateSim() {
+		getToolBarS().setInitListener(new InitiateSim() {
 			public void shouldStart(boolean b) {
 				if (b) {
 					mfs.showIt();
 					MainFrame.this.setVisible(false);
-					toolBarS.turnOffStartButton();
+					getToolBarS().turnOffStartButton();
 					
 				}
 			}
@@ -163,7 +163,7 @@ public class MainFrame extends JFrame {
 		getContentPane().add(audioSelectionPanel, BorderLayout.WEST);
 		getContentPane().add(toolBar, BorderLayout.NORTH);
 		getContentPane().add(setupPanel, BorderLayout.CENTER);
-		getContentPane().add(toolBarS, BorderLayout.EAST);	
+		getContentPane().add(getToolBarS(), BorderLayout.EAST);	
 		getContentPane().add(previewSelectionPanel, BorderLayout.SOUTH);
 		
 	}
@@ -247,6 +247,21 @@ public class MainFrame extends JFrame {
 	
 	public void generatePreview(ArrayList<String> custom) {
 		getContentPane().add(new PreviewSelectionPanel(audioSelectionPanel.audioset));
+	}
+
+
+
+
+	public ToolBarS getToolBarS() {
+		return toolBarS;
+	}
+
+	public void setToolBarS(ToolBarS toolBarS) {
+		this.toolBarS = toolBarS;
+	}
+	
+	public MainFrameSim getMainFrameSim() {
+		return mfs;
 	}
 	
 }

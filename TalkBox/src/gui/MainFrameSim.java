@@ -31,6 +31,7 @@ public class MainFrameSim extends JFrame {
 	private JPanel buttonPanel;
 	private boolean swap1Pressed = false;
 	private boolean swap2Pressed = false;
+	private boolean soundPlayed = false;
 	private Controller controller;
 	private JLabel label = new JLabel();
 
@@ -148,6 +149,7 @@ public class MainFrameSim extends JFrame {
 		String path = controller.getPath().toString();
 		String completePath = path + "\\" + button.getText(); //**
 		audioPlayer.playMusic(completePath);
+		soundPlayed = true;
 	}
 	
 	private JMenuBar createMenuBar() {
@@ -168,6 +170,10 @@ public class MainFrameSim extends JFrame {
 		});
 		
 		return menuBar;
+	}
+	
+	public boolean getSoundPlayed() {
+		return soundPlayed;
 	}
 	
 }

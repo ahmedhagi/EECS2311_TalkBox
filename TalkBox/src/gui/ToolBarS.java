@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class ToolBarS extends JPanel implements ActionListener {
 	private JButton configButton;
 	private InitiateSim is;
+	private boolean started;
 
 	
 	public ToolBarS() {
@@ -21,6 +22,7 @@ public class ToolBarS extends JPanel implements ActionListener {
 		
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 		add(configButton);
+		started = false;
 	}
 	
 	public void setInitListener(InitiateSim listener) {
@@ -37,6 +39,7 @@ public class ToolBarS extends JPanel implements ActionListener {
 		if (clicked == configButton) {
 			if (is != null) {
 				is.shouldStart(true);
+				started = true;
 			}
 		}
 		
@@ -48,5 +51,9 @@ public class ToolBarS extends JPanel implements ActionListener {
 	
 	public void turnOnStart() {
 		configButton.setEnabled(true);
+	}
+	
+	public boolean getStarted() {
+		return started;
 	}
 }
