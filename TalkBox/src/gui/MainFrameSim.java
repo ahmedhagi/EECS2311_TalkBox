@@ -148,7 +148,7 @@ public class MainFrameSim extends JFrame {
 	private void play(JButton button) {
 		String path = controller.getPath().toString();
 		String completePath = path + "\\" + button.getText(); //**
-		audioPlayer.playMusic(completePath);
+		audioPlayer.playMusic(button.getText());
 		soundPlayed = true;
 	}
 	

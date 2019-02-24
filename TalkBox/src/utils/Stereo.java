@@ -1,6 +1,7 @@
 package utils;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -35,9 +36,10 @@ public class Stereo {
 		clip.close();
 		
 		soundfilein = new File(SoundFile);
+		URL url = getClass().getResource("/audio/" + SoundFile);
 		
 		try {
-			audioIn = AudioSystem.getAudioInputStream(soundfilein.toURI().toURL());
+			audioIn = AudioSystem.getAudioInputStream(url);
 			clip.open(audioIn);
 			clip.start();
 		} catch (UnsupportedAudioFileException ee) {

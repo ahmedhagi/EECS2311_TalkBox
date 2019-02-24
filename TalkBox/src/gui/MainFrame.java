@@ -75,7 +75,7 @@ public class MainFrame extends JFrame {
 			public void setFileName(int idx, String fileName) {
 				String path = controller.getPath().toString();
 				String completePath = path +  "\\" + fileName; //**
-				audioPlayer.playMusic(completePath);
+				audioPlayer.playMusic(fileName);
 			}
 			public void generatePreview() {
 				previewSelectionPanel = new PreviewSelectionPanel(audioSelectionPanel.audioset);
