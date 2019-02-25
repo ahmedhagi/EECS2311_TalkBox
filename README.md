@@ -1,5 +1,11 @@
 TalkBox Version 1.0
--------------
+---------------
+
+Note: If running the Project in Eclipse, App.Java in package 'gui'
+is the loader.
+
+---------------
+
 
 #### EECS2311 Software Development Project
 
