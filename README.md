@@ -5,16 +5,18 @@ TalkBox Version 1.0
 
 **TalkBox**
 
-TalkBox is desiged for anyone who is having difficulty to talk and communicate.
-This piece of software can help both caregiver and people who have a disabliity.
+TalkBox is desiged for those with speech difficulties.
+This software can help both caregiver and the speech impaired.
+Audio is played via push buttons corresponding to the desired audio on a graphical user interface.
 
 **TalkBox configuration**
 
-User can make their own custom audioset and check the soundfile beforehand
+User can make their own custom audio sets, record their own audio and check the sound file beforehand. 
+Configurations may be saved and imported.
 
 **TalkBox simulator**
 
-User interface for Talkbox.
+User interface for Talkbox upon clicking the start option on the configurator. 
 
 >**More information :** Check out the [User Manual][1]
 
