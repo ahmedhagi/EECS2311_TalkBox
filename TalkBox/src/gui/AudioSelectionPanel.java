@@ -24,7 +24,6 @@ import controller.Controller;
 
 public class AudioSelectionPanel extends JPanel {
 	private JComboBox audioSelection;
-	PreviewSelectionPanel psp;
 	private JList audioList;
 	private JButton playButton;
 	private JButton setButton;

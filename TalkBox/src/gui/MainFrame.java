@@ -21,7 +21,6 @@ import utils.Stereo;
 
 public class MainFrame extends JFrame {
 	private AudioSelectionPanel audioSelectionPanel;
-	private PreviewSelectionPanel previewSelectionPanel;
 	private ToolBar toolBar;
 	private SetupPanel setupPanel;
 	private ToolBarS toolBarS;
@@ -41,7 +40,6 @@ public class MainFrame extends JFrame {
 		//Initialize
 		audioSelectionPanel = new AudioSelectionPanel();
 		audioSelectionPanel.def_audioset();
-		previewSelectionPanel = new PreviewSelectionPanel();
 		toolBar = new ToolBar();
 		setupPanel = new SetupPanel();
 		controller = audioSelectionPanel.controller;
@@ -76,10 +74,6 @@ public class MainFrame extends JFrame {
 				String path = controller.getPath().toString();
 				String completePath = path +  "\\" + fileName; //**
 				audioPlayer.playMusic(fileName);
-			}
-			public void generatePreview() {
-				previewSelectionPanel = new PreviewSelectionPanel(audioSelectionPanel.audioset);
-				getContentPane().revalidate();
 			}
 		});
 		
@@ -163,8 +157,7 @@ public class MainFrame extends JFrame {
 		getContentPane().add(audioSelectionPanel, BorderLayout.WEST);
 		getContentPane().add(toolBar, BorderLayout.NORTH);
 		getContentPane().add(setupPanel, BorderLayout.CENTER);
-		getContentPane().add(getToolBarS(), BorderLayout.EAST);	
-		getContentPane().add(previewSelectionPanel, BorderLayout.SOUTH);
+		getContentPane().add(toolBarS, BorderLayout.SOUTH);	
 		
 	}
 	
@@ -245,13 +238,6 @@ public class MainFrame extends JFrame {
 	      mfs.setSwapButtons();
 	}
 	
-	public void generatePreview(ArrayList<String> custom) {
-		getContentPane().add(new PreviewSelectionPanel(audioSelectionPanel.audioset));
-	}
-
-
-
-
 	public ToolBarS getToolBarS() {
 		return toolBarS;
 	}

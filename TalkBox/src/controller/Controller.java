@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gui.MainFrame;
-import gui.PreviewSelectionPanel;
 import model.TalkBox;
 
 public class Controller {
