@@ -1,14 +1,22 @@
 TalkBox Version 1.0
 -------------
 
-#### EECS Software Development Project
+#### EECS2311 Software Development Project
 
-**TalkBox Simulator**
-A piece of software that simulates the behaviour of any TalkBox device.
-Has a user interface similar to that of the device.
-The number of buttons and their functionality is configurable.
-Is fully tested to behave as the hardware device.
+**TalkBox**
 
->**Get start:** Check out the [User Manual][1] for quick start
+TalkBox is desiged for anyone who is having difficulty to talk and communicate.
+This piece of software can help both caregiver and people who have a disabliity.
 
-[1]: 
+**TalkBox configuration**
+
+User can make their own custom audioset and check the soundfile beforehand
+
+**TalkBox simulator**
+
+User interface for Talkbox.
+
+>**More information :** Check out the [User Manual][1]
+
+[1]: https://github.com/persaud29/EECS2311_TalkBox/blob/master/Documentation/Group3_TalkBox_UserManual_Documentation.pdf
+
