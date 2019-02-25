@@ -18,6 +18,10 @@ Configurations may be saved and imported.
 
 User interface for Talkbox upon clicking the start option on the configurator. 
 
+** vM Release 1.0 **
+
+Please see the vM folder for the TalkBox application. Enjoy!
+
 >**More information :** Check out the [User Manual][1]
 
 [1]: https://github.com/persaud29/EECS2311_TalkBox/blob/master/Documentation/Group3_TalkBox_UserManual_Documentation.pdf
