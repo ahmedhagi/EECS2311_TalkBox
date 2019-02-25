@@ -53,7 +53,8 @@ public class RecordDialog extends JDialog {
 				if (button == recordButton) {
 					if (button.isSelected()) {
 						String path = System.getProperty("user.dir");
-						String completeFileSource = path + "\\src\\audio\\" + RecordDialog.this.fileName + ".wav";
+						String completeFileSource = path + "\\bin\\audio\\" + RecordDialog.this.fileName + ".wav";
+				
 						recorder.startRecording(completeFileSource);
 						button.setText("Stop");
 						
